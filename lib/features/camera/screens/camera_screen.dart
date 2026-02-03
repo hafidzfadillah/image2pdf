@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:camera/camera.dart';
@@ -35,7 +36,7 @@ class _GenerationModeSelection {
 class _CameraScreenState extends State<CameraScreen> {
   CameraController? _controller;
   List<CameraDescription>? _cameras;
-  List<File> _capturedImages = [];
+  final List<File> _capturedImages = [];
   bool _isInitialized = false;
   double _currentZoom = 1.0;
   PdfSettings _pdfSettings = const PdfSettings();
@@ -71,9 +72,7 @@ class _CameraScreenState extends State<CameraScreen> {
     }
 
     try {
-      if (_cameras == null) {
-        _cameras = await availableCameras();
-      }
+      _cameras ??= await availableCameras();
       if (_cameras == null || _cameras!.isEmpty) return;
 
       final cameraToUse = camera ?? _cameras![0];
@@ -87,10 +86,10 @@ class _CameraScreenState extends State<CameraScreen> {
       );
 
       await _controller!.initialize();
-      
+
       // Set initial zoom
       _currentZoom = await _controller!.getMinZoomLevel();
-      
+
       if (mounted) {
         setState(() {
           _isInitialized = true;
@@ -319,7 +318,8 @@ class _CameraScreenState extends State<CameraScreen> {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
             content: Text('PDF saved to Downloads: ${result.fileName}'),
-            duration: const Duration(seconds: AppConstants.snackBarDurationSeconds),
+            duration:
+                const Duration(seconds: AppConstants.snackBarDurationSeconds),
           ),
         );
 
@@ -384,7 +384,8 @@ class _CameraScreenState extends State<CameraScreen> {
                       child: CameraPreview(_controller!),
                     ),
                     Container(
-                      padding: const EdgeInsets.all(AppConstants.defaultPadding),
+                      padding:
+                          const EdgeInsets.all(AppConstants.defaultPadding),
                       color: Colors.black87,
                       child: Column(
                         children: [
@@ -418,9 +419,12 @@ class _CameraScreenState extends State<CameraScreen> {
                     ),
                     CapturedImageList(
                       images: _capturedImages,
-                      onDelete: _capturedImages.isNotEmpty ? _deleteImage : null,
-                      onReorder: _capturedImages.length > 1 ? _reorderImages : null,
-                      onTap: _capturedImages.isNotEmpty ? _openImagePreview : null,
+                      onDelete:
+                          _capturedImages.isNotEmpty ? _deleteImage : null,
+                      onReorder:
+                          _capturedImages.length > 1 ? _reorderImages : null,
+                      onTap:
+                          _capturedImages.isNotEmpty ? _openImagePreview : null,
                     ),
                   ],
                 ),

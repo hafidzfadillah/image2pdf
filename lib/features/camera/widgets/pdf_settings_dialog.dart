@@ -1,3 +1,4 @@
+// ignore_for_file: deprecated_member_use
 import 'package:flutter/material.dart';
 import 'package:pdf/pdf.dart';
 import 'package:image_to_pdf/core/models/pdf_settings.dart';
@@ -152,4 +153,3 @@ class _PdfSettingsDialogState extends State<PdfSettingsDialog> {
     );
   }
 }
-

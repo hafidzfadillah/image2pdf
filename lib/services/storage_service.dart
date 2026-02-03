@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 import 'package:flutter/services.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:image_to_pdf/core/constants/app_constants.dart';
@@ -94,4 +93,3 @@ class StorageService {
     return '${tempDir.path}/$fileName';
   }
 }
-
