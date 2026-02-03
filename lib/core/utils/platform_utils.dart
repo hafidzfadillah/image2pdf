@@ -1,14 +1,15 @@
 import 'dart:io';
+import 'package:flutter/foundation.dart';
 
 /// Platform utility functions
 class PlatformUtils {
   PlatformUtils._();
 
   /// Check if running on Android
-  static bool get isAndroid => Platform.isAndroid;
+  static bool get isAndroid => defaultTargetPlatform == TargetPlatform.android;
 
   /// Check if running on iOS
-  static bool get isIOS => Platform.isIOS;
+  static bool get isIOS => defaultTargetPlatform == TargetPlatform.iOS;
 
   /// Check if running on mobile platform
   static bool get isMobile => isAndroid || isIOS;
@@ -23,4 +24,3 @@ class PlatformUtils {
     return 'Unknown';
   }
 }
-
